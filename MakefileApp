@@ -1,0 +1,55 @@
+####################################################
+#           Input Parameters
+####################################################
+APP		= executable
+SRCDIR     	= ./src
+INCDIR		= ./include
+APPDIR    	= ./app
+SRCBUILDDIR   	= ./objs/src
+APPBUILDDIR   	= ./objs/app
+LIBDIR		= ./lib
+MOCKSDIR	= ./mocks
+
+SRCEXT     	= cpp
+INCS       	= -I$(INCDIR)
+####################################################
+#          Compiler Settings
+####################################################
+CC         	= /opt/gcc471/bin/g++471
+CFLAGS     	= -Wall -g -O0 -pedantic -ansi -std=c++0x -MD
+LFLAGS_TEST 	= -lstdc++ -ldl -lncurses++ -lform -lmenu -lpanel
+####################################################
+
+SOURCES    	:= $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
+OBJECTS    	:= $(patsubst $(SRCDIR)/%,$(SRCBUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+DEPS       	:= $(OBJECTS:.o=.d)
+
+APP_SOURCES    := $(shell find $(APPDIR) -type f -name "*.$(SRCEXT)")
+APP_OBJECTS    := $(patsubst $(APPDIR)/%,$(APPBUILDDIR)/%,$(APP_SOURCES:.$(SRCEXT)=.o))
+APP_DEPS       := $(APP_OBJECTS:.o=.d)
+APP_DEPS       += $(DEPS)
+
+#### Debugging rule --- print out variables
+#print:
+#	@echo "in PRINT"
+#	@echo $(SOURCES)
+#	@echo $(OBJECTS)
+#	@echo $(DEPS)
+
+#### Main rule --- build the test runner
+all: $(APP)
+
+$(APP): $(OBJECTS) $(APP_OBJECTS)
+	$(CC) $(CFLAGS) $(INCS) $(OBJECTS) $(APP_OBJECTS) $(LFLAGS_TEST) -o $@  
+
+$(SRCBUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCS) $< -o $@ 
+
+$(APPBUILDDIR)/%.o: $(APPDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCS) $< -o $@   
+
+clean:
+	rm $(SRCBUILDDIR)/*.o $(SRCBUILDDIR)/*.d executable $(APPBUILDDIR)/*.o $(APPBUILDDIR)/*.d
+
+-include $(DEPS)
+-include $(APP_DEPS)

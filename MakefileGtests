@@ -1,0 +1,71 @@
+####################################################
+#           Input Parameters
+####################################################
+TESTRUNNER	= runner
+SRCDIR     	= ./src
+INCDIR		= ./include
+TESTDIR    	= ./test
+MOCKSDIR        = ./mocks
+SRCBUILDDIR   	= ./objs/src
+TESTBUILDDIR   	= ./objs/test
+MOCKSBUILDDIR   = ./objs/mocks
+LIBDIR		= ./lib
+
+SRCEXT     	= cpp
+INCS       	= -I$(INCDIR) -I$(MOCKSDIR)
+####################################################
+#          Compiler Settings
+####################################################
+CC         	= /opt/gcc471/bin/g++471
+AR          = ar
+CFLAGS     	= -Wall -g -O0 -pedantic -ansi -std=c++0x -MD -DTESTING
+LFLAGS_TEST 	= -L$(LIBDIR) -lgtest -lgtest_main -lpthread -lleddriver
+####################################################
+
+SOURCES    	:= $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
+OBJECTS    	:= $(patsubst $(SRCDIR)/%,$(SRCBUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+DEPS       	:= $(OBJECTS:.o=.d)
+
+TEST_SOURCES    := $(shell find $(TESTDIR) -type f -name "*.$(SRCEXT)")
+TEST_OBJECTS    := $(patsubst $(TESTDIR)/%,$(TESTBUILDDIR)/%,$(TEST_SOURCES:.$(SRCEXT)=.o))
+TEST_DEPS       := $(TEST_OBJECTS:.o=.d)
+TEST_DEPS       += $(DEPS)
+
+MOCK_SOURCES    := $(shell find $(MOCKSDIR) -type f -name "*.$(SRCEXT)")
+MOCK_OBJECTS    := $(patsubst $(MOCKSDIR)/%,$(MOCKSBUILDDIR)/%,$(MOCK_SOURCES:.$(SRCEXT)=.o))
+MOCK_DEPS       := $(MOCK_OBJECTS:.o=.d)
+MOCK_DEPS       += $(TEST_DEPS)
+MOCK_DEPS       += $(DEPS)
+
+
+#### Debugging rule --- print out variables
+print:
+	@echo "in PRINT"
+#	@echo $(SOURCES)
+#	@echo $(OBJECTS)
+#	@echo $(DEPS)
+	@echo $(TEST_DEPS)
+
+#### Main rule --- build the test runner
+all: $(TESTRUNNER)
+
+$(TESTRUNNER): $(OBJECTS) $(TEST_OBJECTS) $(MOCK_OBJECTS)
+	$(CC) $(CFLAGS) $(INCS) $(TEST_OBJECTS) $(MOCK_OBJECTS) $(LFLAGS_TEST) -o $@  
+
+$(SRCBUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCS) $< -o $@
+	$(AR) -cvq $(LIBDIR)/libleddriver.a $@  
+
+$(TESTBUILDDIR)/%.o: $(TESTDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCS) $< -o $@
+	
+$(MOCKSBUILDDIR)/%.o: $(MOCKSDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCS) $< -o $@   
+
+clean:
+	rm $(SRCBUILDDIR)/*.o $(SRCBUILDDIR)/*.d runner $(TESTBUILDDIR)/*.o $(TESTBUILDDIR)/*.d \
+	$(MOCKSBUILDDIR)/*.o $(MOCKSBUILDDIR)/*.d
+
+-include $(DEPS)
+-include $(TEST_DEPS)
+-include $(MOCK_DEPS)
