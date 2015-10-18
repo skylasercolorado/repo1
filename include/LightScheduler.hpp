@@ -5,10 +5,10 @@ namespace Camax
 {
   class LightScheduler
   {
-  public:
-    void ScheduleTurnOn();
-    void RemoveSchedule();
-    void WakeUp();
+    public:
+      void ScheduleTurnOn();
+      void RemoveSchedule();
+      void WakeUp();
   };
 }
 

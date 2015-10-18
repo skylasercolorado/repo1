@@ -2,7 +2,7 @@
 #include "gmock/gmock.h"
 
 #include "LightScheduler.hpp"
-#include "ILightController.hpp"
+#include "LightController.hpp"
 #include "ITimeService.hpp"
 
 using namespace Camax;
@@ -18,7 +18,7 @@ class LightSchedulerTest : public ::testing::Test
 
     virtual void SetUp()
     {
-
+      LightController lightController;
     }
 
     virtual void TearDown()
@@ -30,8 +30,25 @@ class LightSchedulerTest : public ::testing::Test
   private:
 };
 
-
-TEST(LightSchedulerTest, ScheduleOnEveryDayNotTimeYet)
+TEST(LightSchedulerTest, NoChangeToLightsDuringInitialization)
 {
-
+  EXPECT_EQ(LightIdUnknown, lightController.GetLastId());
+  EXPECT_EQ(LightStateUnknown, lightController.GetLastState());
 }
+
+//TEST(LightSchedulerTest, ScheduleOnEveryDayNotTimeYet)
+//{
+//
+//  lightScheduler.ScheduleTurnOn(3, EveryDay, 1200);
+//
+//  TimeService ts;
+//  ts.SetDay(Monday);
+//  ts.SetMinute(1199);
+//
+//  ls.WakeUp();
+//
+//  LightController lcs;
+//
+//  EXPECT_EQ(LightIdUnknown, lcs.GetLastId());
+//  EXPECT_EQ(LightStateUnknown, lcs.GetLastState());
+//}
