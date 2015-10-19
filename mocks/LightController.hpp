@@ -16,7 +16,6 @@ namespace Camax
   class LightController : public ILightController
   {
     public:
-      //LightController() : lastId(LightIdUnknown), lastState(LightStateUnknown) {}
       void turnOn(int id);
       void turnOff(int id);
       // The actual mock starts from hereon forward
