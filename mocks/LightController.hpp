@@ -19,7 +19,7 @@ namespace Camax
       LightController() : lastId(LightIdUnknown), lastState(LightStateUnknown) {}
       void turnOn(int id);
       void turnOff(int id);
-      // This is where the mock starts
+      // The actual mock starts from hereon forward
       int getLastId();
       int getLastState();
 

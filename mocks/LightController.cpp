@@ -1,6 +1,5 @@
 #include "LightController.hpp"
 
-using namespace Camax;
 using Camax::LightController;
 
 void LightController::turnOn(int id)
