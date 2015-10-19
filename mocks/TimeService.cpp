@@ -23,8 +23,8 @@ void TimeService::validateDay(int day)
 
 TimeService::TimeService()
 {
-  time.minuteOfDay = -1;
-  time.dayOfWeek = -1;
+  time.minuteOfDay = TimeUnknown;
+  time.dayOfWeek = TimeUnknown;
 }
 
 Time& TimeService::getTime()

@@ -5,6 +5,11 @@
 
 namespace Camax
 {
+  enum TimeStatus
+  {
+    TimeUnknown
+  };
+
   class TimeService : public ITimeService
   {
     public:
