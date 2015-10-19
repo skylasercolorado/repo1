@@ -86,3 +86,15 @@ TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOff)
   EXPECT_EQ(LightStateOff, LightController::getLastState());
   //! - Notes: I don't even need fake objects. I can just use the the static object-less functions.
 }
+
+TEST_F(LightSchedulerTest, TimeSetStaticAccessWithoutfake)
+{
+  //! -# Set values in spy (fake) instance
+  //! - Yeah, I don't need fake objects.
+  TimeService::setMinute(42);
+  TimeService::setDay(Saturday);
+
+  //! -# Get the values from the real instance and verify they match those set by the spy (fake) instance.
+  EXPECT_EQ(42, timeServiceReal.getTime().minuteOfDay);
+  EXPECT_EQ(Saturday, timeServiceReal.getTime().dayOfWeek);
+}
