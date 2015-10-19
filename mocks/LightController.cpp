@@ -1,13 +1,26 @@
 #include "LightController.hpp"
 
+using namespace Camax;
 using Camax::LightController;
 
-void On(int id)
+void LightController::turnOn(int id)
 {
-
+  lastId = id;
+  lastState = LightStateOn;
 }
 
-void Off(int id)
+void LightController::turnOff(int id)
 {
+  lastId = id;
+  lastState = LightStateOff;
+}
 
+int LightController::getLastId()
+{
+  return lastId;
+}
+
+int LightController::getLastState()
+{
+  return lastState;
 }

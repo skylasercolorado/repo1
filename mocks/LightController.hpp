@@ -7,14 +7,25 @@ namespace Camax
 {
   enum LightStatus
   {
-    LightIdUnknown = -1,
-    LightStateUnknown = -2
+    LightIdUnknown 	= -1,
+    LightStateUnknown 	= -2,
+    LightStateOn 	= 1,
+    LightStateOff 	= 2
   };
 
   class LightController : public ILightController
   {
-    void On(int id);
-    void Off(int id);
+    public:
+      LightController() : lastId(LightIdUnknown), lastState(LightStateUnknown) {}
+      void turnOn(int id);
+      void turnOff(int id);
+      // This is where the mock starts
+      int getLastId();
+      int getLastState();
+
+    private:
+      int lastId;
+      int lastState;
   };
 }
 

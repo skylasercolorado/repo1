@@ -26,11 +26,11 @@ class LightSchedulerTest : public ::testing::Test
 
     }
 
-  private:
+    LightController lightController;
 };
 
-TEST(LightSchedulerTest, NoChangeToLightsDuringInitialization)
+TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
 {
-  EXPECT_EQ(LightIdUnknown, lightController.GetLastId());
-  EXPECT_EQ(LightStateUnknown, lightController.GetLastState());
+  EXPECT_EQ(LightIdUnknown, lightController.getLastId());
+  EXPECT_EQ(LightStateUnknown, lightController.getLastState());
 }
