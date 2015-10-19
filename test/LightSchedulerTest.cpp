@@ -41,3 +41,12 @@ TEST_F(LightSchedulerTest, Create)
   EXPECT_EQ(TimeUnknown, timeService.getTime().minuteOfDay);
   EXPECT_EQ(TimeUnknown, timeService.getTime().dayOfWeek);
 }
+
+TEST_F(LightSchedulerTest, Set)
+{
+  timeService.setMinute(42);
+  timeService.setDay(Saturday);
+
+  EXPECT_EQ(42, timeService.getTime().minuteOfDay);
+  EXPECT_EQ(Saturday, timeService.getTime().dayOfWeek);
+}
