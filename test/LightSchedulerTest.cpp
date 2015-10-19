@@ -26,7 +26,6 @@ class LightSchedulerTest : public ::testing::Test
 
     }
 
-
   private:
 };
 
@@ -35,20 +34,3 @@ TEST(LightSchedulerTest, NoChangeToLightsDuringInitialization)
   EXPECT_EQ(LightIdUnknown, lightController.GetLastId());
   EXPECT_EQ(LightStateUnknown, lightController.GetLastState());
 }
-
-//TEST(LightSchedulerTest, ScheduleOnEveryDayNotTimeYet)
-//{
-//
-//  lightScheduler.ScheduleTurnOn(3, EveryDay, 1200);
-//
-//  TimeService ts;
-//  ts.SetDay(Monday);
-//  ts.SetMinute(1199);
-//
-//  ls.WakeUp();
-//
-//  LightController lcs;
-//
-//  EXPECT_EQ(LightIdUnknown, lcs.GetLastId());
-//  EXPECT_EQ(LightStateUnknown, lcs.GetLastState());
-//}
