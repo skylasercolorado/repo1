@@ -4,21 +4,27 @@
 using namespace Camax;
 using namespace std;
 
-TimeService::TimeService(int minute, int day)
+void TimeService::validateMinute(int minute)
 {
-  //TODO: Validate ranges
   const int hoursInDay = 24;
   const int minutesInHour = 60;
-  if(minute < 0 || minute > ((hoursInDay * minutesInHour) - 1))
-      throw range_error("minutes must be between 0 and 1439");
 
+  if (minute < 0 || minute > ((hoursInDay * minutesInHour) - 1))
+    throw range_error ("minutes must be between 0 and 1439");
+}
+
+void TimeService::validateDay(int day)
+{
   const int daysInWeek = 7;
-  if(day < 1 || day > (daysInWeek))
-        throw range_error("days must be between 1 and 7");
 
+  if (day < 1 || day > (daysInWeek))
+    throw range_error ("days must be between 1 and 7");
+}
 
-  time.minuteOfDay = minute;
-  time.dayOfWeek = day;
+TimeService::TimeService()
+{
+  time.minuteOfDay = -1;
+  time.dayOfWeek = -1;
 }
 
 Time& TimeService::getTime()
@@ -33,12 +39,12 @@ void TimeService::getPeriodicAlarm()
 
 void TimeService::setMinute(int minute)
 {
-  //TODO: Validate ranges
+  validateMinute(minute);
   time.minuteOfDay = minute;
 }
 
 void TimeService::setDay(int day)
 {
-  //TODO: Validate ranges
+  validateDay(day);
   time.dayOfWeek = day;
 }
