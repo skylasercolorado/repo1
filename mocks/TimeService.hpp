@@ -39,6 +39,10 @@ namespace Camax
 	this->time.dayOfWeek = time.dayOfWeek;
 	this->time.minuteOfDay = time.minuteOfDay;
       }
+      void updateMinute(int minute, Time& time)
+      {
+      	time.minuteOfDay = minute;
+      }
       static Time timeImage;
 
     private:

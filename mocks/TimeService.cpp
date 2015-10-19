@@ -34,7 +34,7 @@ TimeService::TimeService()
 
 Time& TimeService::getTime()
 {
-  return time;
+  return timeImage;
 }
 
 void TimeService::getPeriodicAlarm()
