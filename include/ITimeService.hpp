@@ -5,8 +5,8 @@ namespace Camax
 {
   class ITimeService
   {
-    virtual int GetTime() = 0;
-    virtual void SetPeriodicAlarm() = 0;
+    virtual int getTime() = 0;
+    virtual void getPeriodicAlarm() = 0;
   };
 }
 
