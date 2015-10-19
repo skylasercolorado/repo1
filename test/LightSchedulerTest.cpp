@@ -18,7 +18,7 @@ class LightSchedulerTest : public ::testing::Test
 
     virtual void SetUp()
     {
-      LightController lightController;
+
     }
 
     virtual void TearDown()

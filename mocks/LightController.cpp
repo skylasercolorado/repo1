@@ -1,13 +1,13 @@
 #include "LightController.hpp"
 
-using namespace Camax;
+using Camax::LightController;
 
-LightController::On(int id)
+void On(int id)
 {
 
 }
 
-LightController::Off(int id)
+void Off(int id)
 {
 
 }

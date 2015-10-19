@@ -5,13 +5,13 @@
 
 namespace Camax
 {
-  enum
+  enum LightStatus
   {
     LightIdUnknown,
     LightStateUnknown
   };
 
-  class LightController : ILightController
+  class LightController : public ILightController
   {
     void On(int id);
     void Off(int id);
