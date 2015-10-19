@@ -28,8 +28,9 @@ namespace Camax
       static void setDay(int day);
 
     private:
-      Time time;
-      static Time timeImage;
+      //Time time;
+      //static Time timeImage;
+      static Time time;
       static void validateMinute(int minute);
       static void validateDay(int day);
   };
