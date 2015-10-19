@@ -4,6 +4,11 @@
 using namespace Camax;
 using namespace std;
 
+//TimeService::timeImage.minuteOfDay = TimeUnknown;
+//TimeService::timeImage.dayOfWeek = TimeUnknown;
+
+Time TimeService::timeImage = {TimeUnknown, TimeUnknown};
+
 void TimeService::validateMinute(int minute)
 {
   const int hoursInDay = 24;
@@ -39,12 +44,12 @@ void TimeService::getPeriodicAlarm()
 
 void TimeService::setMinute(int minute)
 {
-  validateMinute(minute);
-  time.minuteOfDay = minute;
+  //validateMinute(minute);
+  timeImage.minuteOfDay = minute;
 }
 
 void TimeService::setDay(int day)
 {
-  validateDay(day);
-  time.dayOfWeek = day;
+  //validateDay(day);
+  timeImage.dayOfWeek = day;
 }
