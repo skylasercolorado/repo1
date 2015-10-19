@@ -19,9 +19,6 @@ namespace Camax
 
   class TimeService : public ITimeService
   {
-//    friend void validateMinute(int minute);
-//    friend void validateDay(int day);
-
     public:
       TimeService();
       Time& getTime();
@@ -29,31 +26,13 @@ namespace Camax
       // The actual mock starts from hereon forward
       static void setMinute(int minute);
       static void setDay(int day);
-      static void updateTimeImage(Time time)
-      {
-	timeImage.dayOfWeek = time.dayOfWeek;
-	timeImage.minuteOfDay = time.minuteOfDay;
-      }
-      void updateTime(Time time)
-      {
-	this->time.dayOfWeek = time.dayOfWeek;
-	this->time.minuteOfDay = time.minuteOfDay;
-      }
-      void updateMinute(int minute, Time& time)
-      {
-      	time.minuteOfDay = minute;
-      }
-      static Time timeImage;
 
     private:
       Time time;
-
+      static Time timeImage;
       static void validateMinute(int minute);
       static void validateDay(int day);
   };
-
-  //void validateMinute(int minute);
-  //void validateDay(int day);
 }
 
 #endif // CAMAX_TIMESERVICE_HPP
