@@ -26,27 +26,27 @@ class LightSchedulerTest : public ::testing::Test
 
     }
 
-    LightController lightController;
-    TimeService timeService;
+    LightController lightControllerFake;
+    TimeService timeServiceFake;
 };
 
 TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
 {
-  EXPECT_EQ(LightIdUnknown, lightController.getLastId());
-  EXPECT_EQ(LightStateUnknown, lightController.getLastState());
+  EXPECT_EQ(LightIdUnknown, lightControllerFake.getLastId());
+  EXPECT_EQ(LightStateUnknown, lightControllerFake.getLastState());
 }
 
 TEST_F(LightSchedulerTest, Create)
 {
-  EXPECT_EQ(TimeUnknown, timeService.getTime().minuteOfDay);
-  EXPECT_EQ(TimeUnknown, timeService.getTime().dayOfWeek);
+  EXPECT_EQ(TimeUnknown, timeServiceFake.getTime().minuteOfDay);
+  EXPECT_EQ(TimeUnknown, timeServiceFake.getTime().dayOfWeek);
 }
 
 TEST_F(LightSchedulerTest, Set)
 {
-  timeService.setMinute(42);
-  timeService.setDay(Saturday);
+  timeServiceFake.setMinute(42);
+  timeServiceFake.setDay(Saturday);
 
-  EXPECT_EQ(42, timeService.getTime().minuteOfDay);
-  EXPECT_EQ(Saturday, timeService.getTime().dayOfWeek);
+  EXPECT_EQ(42, timeServiceFake.getTime().minuteOfDay);
+  EXPECT_EQ(Saturday, timeServiceFake.getTime().dayOfWeek);
 }
