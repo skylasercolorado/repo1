@@ -28,6 +28,10 @@ class LightSchedulerTest : public ::testing::Test
 
     LightController lightControllerFake;
     TimeService timeServiceFake;
+
+    LightController lightControllerReal;
+    TimeService timeServiceReal;
+
 };
 
 TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
@@ -49,4 +53,29 @@ TEST_F(LightSchedulerTest, Set)
 
   EXPECT_EQ(42, timeServiceFake.getTime().minuteOfDay);
   EXPECT_EQ(Saturday, timeServiceFake.getTime().dayOfWeek);
+}
+
+TEST_F(LightSchedulerTest, TimeSetStaticAccess)
+{
+  timeServiceFake.setMinute(42);
+  timeServiceFake.setDay(Saturday);
+
+  EXPECT_EQ(42, timeServiceReal.getTime().minuteOfDay);
+  EXPECT_EQ(Saturday, timeServiceReal.getTime().dayOfWeek);
+}
+
+TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOn)
+{
+  lightControllerReal.turnOn(3);
+
+  EXPECT_EQ(3, lightControllerFake.getLastId());
+  EXPECT_EQ(LightStateOn, lightControllerFake.getLastState());
+}
+
+TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOff)
+{
+  lightControllerReal.turnOff(3);
+
+  EXPECT_EQ(3, lightControllerFake.getLastId());
+  EXPECT_EQ(LightStateOff, lightControllerFake.getLastState());
 }
