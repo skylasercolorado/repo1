@@ -48,9 +48,3 @@ void TimeService::setDay(int day)
   validateDay(day);
   time.dayOfWeek = day;
 }
-
-//void TimeService::updateTimeImage()
-//{
-//  timeImage.dayOfWeek = TimeUnknown;
-//  timeImage.minuteOfDay = TimeUnknown;
-//}
