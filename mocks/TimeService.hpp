@@ -26,11 +26,18 @@ namespace Camax
       // The actual mock starts from hereon forward
       void setMinute(int minute);
       void setDay(int day);
+      static void updateTimeImage()
+      {
+	timeImage.dayOfWeek = TimeUnknown;
+	timeImage.minuteOfDay = TimeUnknown;
+      }
 
     private:
       Time time;
+      static Time timeImage;
       void validateMinute(int minute);
       void validateDay(int day);
+
   };
 }
 
