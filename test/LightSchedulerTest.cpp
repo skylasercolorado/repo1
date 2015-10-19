@@ -82,6 +82,7 @@ TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOff)
   lightControllerReal.turnOff(3);
 
   //! -# Read the values through the spy (fake) instance and verify they match those set by the real instance.
-  EXPECT_EQ(3, lightControllerFake.getLastId());
-  EXPECT_EQ(LightStateOff, lightControllerFake.getLastState());
+  EXPECT_EQ(3, LightController::getLastId());
+  EXPECT_EQ(LightStateOff, LightController::getLastState());
+  //! - Notes: I don't even need fake objects. I can just use the the static object-less functions.
 }
