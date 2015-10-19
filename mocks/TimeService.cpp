@@ -44,12 +44,12 @@ void TimeService::getPeriodicAlarm()
 
 void TimeService::setMinute(int minute)
 {
-  //validateMinute(minute);
+  validateMinute(minute);
   timeImage.minuteOfDay = minute;
 }
 
 void TimeService::setDay(int day)
 {
-  //validateDay(day);
+  validateDay(day);
   timeImage.dayOfWeek = day;
 }
