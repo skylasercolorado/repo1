@@ -7,8 +7,8 @@ namespace Camax
 {
   enum LightStatus
   {
-    LightIdUnknown,
-    LightStateUnknown
+    LightIdUnknown = -1,
+    LightStateUnknown = -2
   };
 
   class LightController : public ILightController
