@@ -3,9 +3,15 @@
 
 namespace Camax
 {
+  struct Time
+   {
+     int minuteOfDay;
+     int dayOfWeek;
+   };
+
   class ITimeService
   {
-    virtual int getTime() = 0;
+    virtual Time& getTime() = 0;
     virtual void getPeriodicAlarm() = 0;
   };
 }
