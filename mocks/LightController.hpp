@@ -16,16 +16,16 @@ namespace Camax
   class LightController : public ILightController
   {
     public:
-      LightController() : lastId(LightIdUnknown), lastState(LightStateUnknown) {}
+      //LightController() : lastId(LightIdUnknown), lastState(LightStateUnknown) {}
       void turnOn(int id);
       void turnOff(int id);
       // The actual mock starts from hereon forward
-      int getLastId();
-      int getLastState();
+      static int getLastId();
+      static int getLastState();
 
     private:
-      int lastId;
-      int lastState;
+      static int lastId;
+      static int lastState;
   };
 }
 
