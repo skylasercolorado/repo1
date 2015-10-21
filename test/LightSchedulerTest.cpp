@@ -18,7 +18,7 @@ class LightSchedulerTest : public ::testing::Test
 
     virtual void SetUp()
     {
-
+      LightController::reset();
     }
 
     virtual void TearDown()
@@ -26,8 +26,8 @@ class LightSchedulerTest : public ::testing::Test
 
     }
 
-    LightController lightControllerFake;
-    TimeService timeServiceFake;
+    LightController lightControllerStub;
+    TimeService timeServiceStub;
 
     LightController lightControllerReal;
     TimeService timeServiceReal;
@@ -36,32 +36,32 @@ class LightSchedulerTest : public ::testing::Test
 
 TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
 {
-  EXPECT_EQ(LightIdUnknown, lightControllerFake.getLastId());
-  EXPECT_EQ(LightStateUnknown, lightControllerFake.getLastState());
+  EXPECT_EQ(LightIdUnknown, lightControllerStub.getLastId());
+  EXPECT_EQ(LightStateUnknown, lightControllerStub.getLastState());
 }
 
 TEST_F(LightSchedulerTest, Create)
 {
-  EXPECT_EQ(TimeUnknown, timeServiceFake.getTime().minuteOfDay);
-  EXPECT_EQ(TimeUnknown, timeServiceFake.getTime().dayOfWeek);
+  EXPECT_EQ(TimeUnknown, timeServiceStub.getTime().minuteOfDay);
+  EXPECT_EQ(TimeUnknown, timeServiceStub.getTime().dayOfWeek);
 }
 
 TEST_F(LightSchedulerTest, Set)
 {
-  timeServiceFake.setMinute(42);
-  timeServiceFake.setDay(Saturday);
+  timeServiceStub.setMinute(42);
+  timeServiceStub.setDay(Saturday);
 
-  EXPECT_EQ(42, timeServiceFake.getTime().minuteOfDay);
-  EXPECT_EQ(Saturday, timeServiceFake.getTime().dayOfWeek);
+  EXPECT_EQ(42, timeServiceStub.getTime().minuteOfDay);
+  EXPECT_EQ(Saturday, timeServiceStub.getTime().dayOfWeek);
 }
 
 TEST_F(LightSchedulerTest, TimeSetStaticAccess)
 {
-  //! -# Set values in spy (fake) instance
-  timeServiceFake.setMinute(42);
-  timeServiceFake.setDay(Saturday);
+  //! -# Set values in spy (Stub) instance
+  timeServiceStub.setMinute(42);
+  timeServiceStub.setDay(Saturday);
 
-  //! -# Get the values from the real instance and verify they match those set by the spy (fake) instance.
+  //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
   EXPECT_EQ(42, timeServiceReal.getTime().minuteOfDay);
   EXPECT_EQ(Saturday, timeServiceReal.getTime().dayOfWeek);
 }
@@ -71,9 +71,9 @@ TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOn)
   //! -# Set values in the real instance.
   lightControllerReal.turnOn(3);
 
-  //! -# Read the values through the spy (fake) instance and verify they match those set by the real instance.
-  EXPECT_EQ(3, lightControllerFake.getLastId());
-  EXPECT_EQ(LightStateOn, lightControllerFake.getLastState());
+  //! -# Read the values through the spy (Stub) instance and verify they match those set by the real instance.
+  EXPECT_EQ(3, lightControllerStub.getLastId());
+  EXPECT_EQ(LightStateOn, lightControllerStub.getLastState());
 }
 
 TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOff)
@@ -81,20 +81,34 @@ TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOff)
   //! -# Set values in the real instance.
   lightControllerReal.turnOff(3);
 
-  //! -# Read the values through the spy (fake) instance and verify they match those set by the real instance.
+  //! -# Read the values through the spy (Stub) instance and verify they match those set by the real instance.
   EXPECT_EQ(3, LightController::getLastId());
   EXPECT_EQ(LightStateOff, LightController::getLastState());
-  //! - Notes: I don't even need fake objects. I can just use the the static object-less functions.
+  //! - Notes: I don't even need Stub objects. I can just use the the static object-less functions.
 }
 
-TEST_F(LightSchedulerTest, TimeSetStaticAccessWithoutfake)
+TEST_F(LightSchedulerTest, TimeSetStaticAccessWithoutStub)
 {
-  //! -# Set values in spy (fake) instance
-  //! - Yeah, I don't need fake objects.
+  //! -# Set values in spy (Stub) instance
+  //! - Yeah, I don't need Stub objects.
   TimeService::setMinute(42);
   TimeService::setDay(Saturday);
 
-  //! -# Get the values from the real instance and verify they match those set by the spy (fake) instance.
+  //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
   EXPECT_EQ(42, timeServiceReal.getTime().minuteOfDay);
   EXPECT_EQ(Saturday, timeServiceReal.getTime().dayOfWeek);
 }
+
+TEST_F(LightSchedulerTest, ScheduleOnEverydayNotTimeYet)
+{
+  //! -# Set values in spy (Stub) instance
+  //! - Yeah, I don't need Stub objects.
+  TimeService::setMinute(1199);
+  TimeService::setDay(Monday);
+
+  //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
+  EXPECT_EQ(LightIdUnknown, lightControllerStub.getLastId());
+  EXPECT_EQ(LightStateUnknown, lightControllerStub.getLastState());
+}
+
+

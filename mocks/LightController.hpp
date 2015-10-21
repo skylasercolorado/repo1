@@ -21,6 +21,7 @@ namespace Camax
       // The actual mock starts from hereon forward
       static int getLastId();
       static int getLastState();
+      static void reset();
 
     private:
       static int lastId;
