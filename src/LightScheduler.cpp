@@ -29,15 +29,10 @@ void LightScheduler::WakeUp()
   for(vector<ScheduledLightEvent>::iterator it = scheduledLightEvents.begin();
       it != scheduledLightEvents.end(); it++)
     {
-      cout << "day: " << it->day << "\n";
-      cout << "minuteOfDay: " << it->minuteOfDay << "\n";
-      cout << "timeService.getTime().dayOfWeek: " << timeService.getTime().dayOfWeek << "\n";
-      cout << "timeService.getTime().minuteOfDay: " << timeService.getTime().minuteOfDay << "\n";
       if((it->day == timeService.getTime().dayOfWeek ||
 	  it->day == Everyday) &&
 	 it->minuteOfDay == timeService.getTime().minuteOfDay)
 	{
-	  cout << "id: " << it->id << "\n";
 	  lightController.turnOn(it->id);
 	}
     }
