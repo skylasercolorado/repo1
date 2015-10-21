@@ -19,6 +19,7 @@ class LightSchedulerTest : public ::testing::Test
     virtual void SetUp()
     {
       LightController::reset();
+      TimeService::reset();
     }
 
     virtual void TearDown()
