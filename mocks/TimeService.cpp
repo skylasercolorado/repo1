@@ -28,11 +28,11 @@ void TimeService::validateDay(int day)
     }
 }
 
-//TimeService::TimeService()
-//{
-//  time.minuteOfDay = TimeUnknown;
-//  time.dayOfWeek = TimeUnknown;
-//}
+void TimeService::reset()
+{
+  time.minuteOfDay = TimeUnknown;
+  time.dayOfWeek = TimeUnknown;
+}
 
 Time& TimeService::getTime()
 {
