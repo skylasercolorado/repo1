@@ -32,7 +32,7 @@ class LightSchedulerTest : public ::testing::Test
     LightController lightControllerReal;
     TimeService timeServiceReal;
 
-   // LightScheduler lightScheduler;
+    LightScheduler lightScheduler;
 };
 
 TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
@@ -104,10 +104,10 @@ TEST_F(LightSchedulerTest, ScheduleOnEverydayNotTimeYet)
 {
   //! -# Set values in spy (Stub) instance
   //! - Yeah, I don't need Stub objects.
- // lightScheduler.ScheduleTurnOn(3, Everyday, 1200);
+  lightScheduler.ScheduleTurnOn(3, Everyday, 1200);
   TimeService::setDay(Monday);
   TimeService::setMinute(1199);
-  //lightScheduler.WakeUp();
+  lightScheduler.WakeUp();
 
   //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
   EXPECT_EQ(LightIdUnknown, lightControllerStub.getLastId());
