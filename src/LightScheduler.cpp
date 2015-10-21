@@ -9,8 +9,7 @@ void LightScheduler::ScheduleTurnOn(int id, enum TimeStatus day, int minute)
   TimeService::validateDay(day);
   TimeService::validateMinute(minute);
 
-  ScheduledLightEvent event = {id, day, minute};
-  scheduledLightEvents.push_back(event);
+  scheduledLightEvents.push_back(ScheduledLightEvent(id, day, minute));
 }
 
 void LightScheduler::RemoveSchedule()

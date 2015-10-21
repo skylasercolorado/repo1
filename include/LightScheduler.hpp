@@ -8,11 +8,14 @@ using namespace std;
 
 namespace Camax
 {
-  typedef struct
+  typedef struct ScheduledLightEvent
   {
     int id;
     enum TimeStatus day;
     int minuteOfDay;
+
+    ScheduledLightEvent(int _id, enum TimeStatus _day, int _minuteOfDay) :
+      id(_id), day(_day), minuteOfDay(_minuteOfDay) {}
   } ScheduledLightEvent;
 
   vector<ScheduledLightEvent> scheduledLightEvents;
