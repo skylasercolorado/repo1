@@ -119,7 +119,7 @@ TEST_F(LightSchedulerTest, ScheduleOnEverydayItsTime)
 {
   //! -# Set values in spy (Stub) instance
   //! - Yeah, I don't need Stub objects.
-  lightScheduler.ScheduleTurnOn(3, Monday, 1200);
+  lightScheduler.ScheduleTurnOn(3, Everyday, 1200);
   TimeService::setDay(Monday);
   TimeService::setMinute(1200);
   lightScheduler.WakeUp();
