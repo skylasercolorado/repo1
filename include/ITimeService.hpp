@@ -3,6 +3,19 @@
 
 namespace Camax
 {
+  enum TimeStatus
+    {
+      TimeUnknown,
+      Monday,
+      Tuesday,
+      Wednesday,
+      Thursday,
+      Friday,
+      Saturday,
+      Sunday,
+      Everyday
+    };
+
   struct Time
    {
      int minuteOfDay;

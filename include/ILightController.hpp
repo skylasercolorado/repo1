@@ -3,6 +3,14 @@
 
 namespace Camax
 {
+  enum LightStatus
+   {
+     LightIdUnknown 	= -1,
+     LightStateUnknown 	= -2,
+     LightStateOn 	= 1,
+     LightStateOff 	= 2
+   };
+
   class ILightController
   {
     virtual void turnOn(int id) = 0;

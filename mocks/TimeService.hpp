@@ -5,18 +5,6 @@
 
 namespace Camax
 {
-  enum TimeStatus
-  {
-    TimeUnknown,
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday
-  };
-
   class TimeService : public ITimeService
   {
     public:
