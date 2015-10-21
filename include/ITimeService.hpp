@@ -5,7 +5,6 @@ namespace Camax
 {
   enum TimeStatus
     {
-      TimeUnknown,
       Monday,
       Tuesday,
       Wednesday,
@@ -13,7 +12,8 @@ namespace Camax
       Friday,
       Saturday,
       Sunday,
-      Everyday
+      Everyday,
+      TimeUnknown // Marker of last element in enumeration
     };
 
   struct Time

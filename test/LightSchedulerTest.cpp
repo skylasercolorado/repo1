@@ -114,4 +114,18 @@ TEST_F(LightSchedulerTest, ScheduleOnEverydayNotTimeYet)
   EXPECT_EQ(LightStateUnknown, lightControllerStub.getLastState());
 }
 
+TEST_F(LightSchedulerTest, ScheduleOnEverydayItsTime)
+{
+  //! -# Set values in spy (Stub) instance
+  //! - Yeah, I don't need Stub objects.
+  lightScheduler.ScheduleTurnOn(3, Monday, 1200);
+  TimeService::setDay(Monday);
+  TimeService::setMinute(1200);
+  lightScheduler.WakeUp();
+
+  //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
+  EXPECT_EQ(3, lightControllerStub.getLastId());
+  EXPECT_EQ(LightStateOn, lightControllerStub.getLastState());
+}
+
 

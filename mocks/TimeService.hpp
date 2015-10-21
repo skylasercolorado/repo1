@@ -8,7 +8,7 @@ namespace Camax
   class TimeService : public ITimeService
   {
     public:
-      TimeService();
+      //TimeService();
       Time& getTime();
       void getPeriodicAlarm();
       // The actual mock starts from hereon forward

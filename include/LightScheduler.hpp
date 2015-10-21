@@ -18,14 +18,15 @@ namespace Camax
       id(_id), day(_day), minuteOfDay(_minuteOfDay) {}
   } ScheduledLightEvent;
 
-  vector<ScheduledLightEvent> scheduledLightEvents;
-
   class LightScheduler
   {
     public:
       void ScheduleTurnOn(int id, enum TimeStatus day, int minute);
       void RemoveSchedule();
       void WakeUp();
+
+    private:
+      vector<ScheduledLightEvent> scheduledLightEvents;
   };
 }
 
