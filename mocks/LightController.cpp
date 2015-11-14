@@ -2,6 +2,15 @@
 
 using Camax::LightController;
 
+int LightController::lastId = LightIdUnknown;
+int LightController::lastState = LightStateUnknown;
+
+void LightController::reset()
+{
+  LightController::lastId = LightIdUnknown;
+  LightController::lastState = LightStateUnknown;
+}
+
 void LightController::turnOn(int id)
 {
   lastId = id;

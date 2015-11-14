@@ -5,32 +5,20 @@
 
 namespace Camax
 {
-  enum TimeStatus
-  {
-    TimeUnknown,
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday
-  };
-
   class TimeService : public ITimeService
   {
     public:
-      TimeService();
       Time& getTime();
       void getPeriodicAlarm();
       // The actual mock starts from hereon forward
-      void setMinute(int minute);
-      void setDay(int day);
+      static void setMinute(int minute);
+      static void setDay(int day);
+      static void validateMinute(int minute);
+      static void validateDay(int day);
+      static void reset();
 
     private:
-      Time time;
-      void validateMinute(int minute);
-      void validateDay(int day);
+      static Time time;
   };
 }
 

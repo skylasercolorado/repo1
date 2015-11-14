@@ -19,7 +19,7 @@ INCS       	= -I$(INCDIR) -I$(MOCKSDIR)
 CC         	= /opt/gcc471/bin/g++471
 AR          = ar
 CFLAGS     	= -Wall -g -O0 -pedantic -ansi -std=c++0x -MD -DTESTING
-LFLAGS_TEST 	= -L$(LIBDIR) -lgtest -lgtest_main -lpthread -lleddriver
+LFLAGS_TEST 	= -L$(LIBDIR) -lgtest -lgtest_main -lpthread -llightscheduler
 ####################################################
 
 SOURCES    	:= $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
@@ -54,7 +54,7 @@ $(TESTRUNNER): $(OBJECTS) $(TEST_OBJECTS) $(MOCK_OBJECTS)
 
 $(SRCBUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) -c $(CFLAGS) $(INCS) $< -o $@
-	$(AR) -cvq $(LIBDIR)/libleddriver.a $@  
+	$(AR) -cvq $(LIBDIR)/liblightscheduler.a $@  
 
 $(TESTBUILDDIR)/%.o: $(TESTDIR)/%.cpp
 	$(CC) -c $(CFLAGS) $(INCS) $< -o $@
@@ -64,7 +64,7 @@ $(MOCKSBUILDDIR)/%.o: $(MOCKSDIR)/%.cpp
 
 clean:
 	rm $(SRCBUILDDIR)/*.o $(SRCBUILDDIR)/*.d runner $(TESTBUILDDIR)/*.o $(TESTBUILDDIR)/*.d \
-	$(MOCKSBUILDDIR)/*.o $(MOCKSBUILDDIR)/*.d
+	$(MOCKSBUILDDIR)/*.o $(MOCKSBUILDDIR)/*.d $(LIBDIR)/*.*
 
 -include $(DEPS)
 -include $(TEST_DEPS)
