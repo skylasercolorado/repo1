@@ -13,7 +13,15 @@ void LightScheduler::ScheduleTurnOn(int id, enum TimeStatus day, int minute)
   TimeService::validateDay(day);
   TimeService::validateMinute(minute);
 
-  scheduledLightEvents.push_back(ScheduledLightEvent(id, day, minute));
+  scheduledLightEvents.push_back(ScheduledLightEvent(id, day, minute, LightStateOn));
+}
+
+void LightScheduler::ScheduleTurnOff(int id, enum TimeStatus day, int minute)
+{
+  TimeService::validateDay(day);
+  TimeService::validateMinute(minute);
+
+  scheduledLightEvents.push_back(ScheduledLightEvent(id, day, minute, LightStateOff));
 }
 
 void LightScheduler::RemoveSchedule()
@@ -33,7 +41,19 @@ void LightScheduler::WakeUp()
 	  it->day == Everyday) &&
 	 it->minuteOfDay == timeService.getTime().minuteOfDay)
 	{
-	  lightController.turnOn(it->id);
+	  switch (it->lightStatus)
+	    {
+	    case LightStateOn: 
+	      lightController.turnOn(it->id);
+	      break;
+	      
+	    case LightStateOff:
+	      lightController.turnOff(it->id);
+	      break;
+	      
+	    default:
+	      break;
+	    }
 	}
     }
 }
