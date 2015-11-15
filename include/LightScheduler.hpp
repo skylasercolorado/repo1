@@ -3,6 +3,8 @@
 
 #include "ITimeService.hpp"
 #include "ILightController.hpp"
+#include "TimeService.hpp"
+#include "LightController.hpp"
 #include <vector>
 
 using namespace std;
@@ -30,6 +32,8 @@ namespace Camax
     
   private:
     vector<ScheduledLightEvent> scheduledLightEvents;
+    TimeService timeService;
+    LightController lightController;
   };
 }
 

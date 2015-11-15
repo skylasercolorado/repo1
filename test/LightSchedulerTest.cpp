@@ -36,18 +36,21 @@ class LightSchedulerTest : public ::testing::Test
     LightScheduler lightScheduler;
 };
 
+// OK. The same as the create function.
 TEST_F(LightSchedulerTest, NoChangeToLightsDuringInitialization)
 {
   EXPECT_EQ(LightIdUnknown, lightControllerStub.getLastId());
   EXPECT_EQ(LightStateUnknown, lightControllerStub.getLastState());
 }
 
+//OK
 TEST_F(LightSchedulerTest, Create)
 {
   EXPECT_EQ(TimeUnknown, timeServiceStub.getTime().minuteOfDay);
   EXPECT_EQ(TimeUnknown, timeServiceStub.getTime().dayOfWeek);
 }
 
+//OK
 TEST_F(LightSchedulerTest, Set)
 {
   timeServiceStub.setMinute(42);
@@ -68,6 +71,7 @@ TEST_F(LightSchedulerTest, TimeSetStaticAccess)
   EXPECT_EQ(Saturday, timeServiceReal.getTime().dayOfWeek);
 }
 
+//OK. The same as the remember the last id controlled test.
 TEST_F(LightSchedulerTest, ControllerSetStaticAccessTurnOn)
 {
   //! -# Set values in the real instance.
