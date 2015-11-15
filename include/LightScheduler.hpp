@@ -9,7 +9,7 @@ using namespace std;
 
 namespace Camax
 {
-  typedef struct ScheduledLightEvent
+  struct ScheduledLightEvent
   {
     int id;
     TimeStatus day;
@@ -18,7 +18,7 @@ namespace Camax
     
     ScheduledLightEvent(int _id, TimeStatus _day, int _minuteOfDay, LightStatus _lightStatus) :
       id(_id), day(_day), minuteOfDay(_minuteOfDay), lightStatus(_lightStatus)  {}
-  } ScheduledLightEvent;
+  };
   
   class LightScheduler
   {
