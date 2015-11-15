@@ -10,30 +10,36 @@ using namespace std;
 
 class LightSchedulerTest : public ::testing::Test
 {
-  public:
-    LightSchedulerTest()
-    {
-
-    }
-
-    virtual void SetUp()
-    {
-      LightController::reset();
-      TimeService::reset();
-    }
-
-    virtual void TearDown()
-    {
-
-    }
-
-    LightController lightControllerStub;
-    TimeService timeServiceStub;
-
-    LightController lightControllerReal;
-    TimeService timeServiceReal;
-
-    LightScheduler lightScheduler;
+public:
+  LightSchedulerTest()
+  {
+    
+  }
+  
+  virtual void SetUp()
+  {
+    LightController::reset();
+    TimeService::reset();
+  }
+  
+  virtual void TearDown()
+  {
+    
+  }
+  
+  LightScheduler lightScheduler;
+  
+  // I actually don't really need to instantiate any stubs.
+  // However, will leave this because in the first few tests
+  // I test that the stubbing mechanism works.
+  // I just need to call the static vars/functions from their
+  // respective classes.
+  
+  LightController lightControllerStub;
+  TimeService timeServiceStub;
+  
+  LightController lightControllerReal;
+  TimeService timeServiceReal;
 };
 
 // OK. The same as the create function.
@@ -145,6 +151,17 @@ TEST_F(LightSchedulerTest, ScheduleOffEverydayItsTime)
   //! -# Get the values from the real instance and verify they match those set by the spy (Stub) instance.
   EXPECT_EQ(3, lightControllerStub.getLastId());
   EXPECT_EQ(LightStateOff, lightControllerStub.getLastState());
+}
+
+
+TEST_F(LightSchedulerTest, NoScheduleNothingHappens)
+{
+  TimeService::setDay(Monday);
+  TimeService::setMinute(100);
+  lightScheduler.WakeUp();
+
+  EXPECT_EQ(LightIdUnknown, LightController::getLastId());
+  EXPECT_EQ(LightStateUnknown, LightController::getLastState());
 }
 
 
