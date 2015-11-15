@@ -1,7 +1,4 @@
 #include "LightScheduler.hpp"
-// #include "TimeService.hpp"
-// #include "LightController.hpp"
-
 #include <vector>
 #include <iostream>
 
@@ -31,9 +28,6 @@ void LightScheduler::RemoveSchedule()
 
 void LightScheduler::WakeUp()
 {
-  // TimeService timeService;
-  // LightController lightController;
-
   for(vector<ScheduledLightEvent>::iterator it = scheduledLightEvents.begin();
       it != scheduledLightEvents.end(); it++)
     {
