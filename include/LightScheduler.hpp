@@ -12,19 +12,19 @@ namespace Camax
   typedef struct ScheduledLightEvent
   {
     int id;
-    enum TimeStatus day;
+    TimeStatus day;
     int minuteOfDay;
-    enum LightStatus lightStatus;
+    LightStatus lightStatus;
     
-    ScheduledLightEvent(int _id, enum TimeStatus _day, int _minuteOfDay, enum LightStatus _lightStatus) :
+    ScheduledLightEvent(int _id, TimeStatus _day, int _minuteOfDay, LightStatus _lightStatus) :
       id(_id), day(_day), minuteOfDay(_minuteOfDay), lightStatus(_lightStatus)  {}
   } ScheduledLightEvent;
   
   class LightScheduler
   {
   public:
-    void ScheduleTurnOn(int id, enum TimeStatus day, int minute);
-    void ScheduleTurnOff(int id, enum TimeStatus day, int minute);
+    void ScheduleTurnOn(int id, TimeStatus day, int minute);
+    void ScheduleTurnOff(int id, TimeStatus day, int minute);
     void RemoveSchedule();
     void WakeUp();
     

@@ -8,7 +8,7 @@
 using namespace Camax;
 using namespace std;
 
-void LightScheduler::ScheduleTurnOn(int id, enum TimeStatus day, int minute)
+void LightScheduler::ScheduleTurnOn(int id, TimeStatus day, int minute)
 {
   TimeService::validateDay(day);
   TimeService::validateMinute(minute);
@@ -16,7 +16,7 @@ void LightScheduler::ScheduleTurnOn(int id, enum TimeStatus day, int minute)
   scheduledLightEvents.push_back(ScheduledLightEvent(id, day, minute, LightStateOn));
 }
 
-void LightScheduler::ScheduleTurnOff(int id, enum TimeStatus day, int minute)
+void LightScheduler::ScheduleTurnOff(int id, TimeStatus day, int minute)
 {
   TimeService::validateDay(day);
   TimeService::validateMinute(minute);
