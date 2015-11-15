@@ -9,7 +9,7 @@ namespace Camax
   {
     public:
       Time& getTime();
-      void getPeriodicAlarm();
+      void setPeriodicAlarm();
       // The actual mock starts from hereon forward
       static void setMinute(int minute);
       static void setDay(int day);

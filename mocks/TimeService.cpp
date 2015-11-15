@@ -39,7 +39,7 @@ Time& TimeService::getTime()
   return time;
 }
 
-void TimeService::getPeriodicAlarm()
+void TimeService::setPeriodicAlarm()
 {
 
 }
