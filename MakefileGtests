@@ -16,7 +16,13 @@ INCS       	= -I$(INCDIR) -I$(MOCKSDIR)
 ####################################################
 #          Compiler Settings
 ####################################################
-CC         	= /opt/gcc471/bin/g++471
+DISTRO := $(shell uname -r)
+ifneq (,$(findstr Ubuntu, $(DISTRO)))
+   CC           = g++
+else
+   CC         	= /opt/gcc471/bin/g++471
+endif
+
 AR          = ar
 CFLAGS     	= -Wall -g -O0 -pedantic -ansi -std=c++0x -MD -DTESTING
 LFLAGS_TEST 	= -L$(LIBDIR) -lgtest -lgtest_main -lpthread -llightscheduler
