@@ -17,8 +17,6 @@ INCS       	= -I$(INCDIR) -I$(MOCKSDIR)
 #          Compiler Settings
 ####################################################
 DISTRO := $(shell uname -r)
-FIND := $(findstring fc14, $(DISTRO))
-#FIND := $(findstring a, a b c)
 ifneq (,$(findstring fc14, $(DISTRO))) # If fedora core. Fedora Core 14 does not have native C++11 support.
    CC         	= /opt/gcc471/bin/g++471
 else
@@ -53,11 +51,8 @@ print:
 #	@echo $(OBJECTS)
 #	@echo $(DEPS)
 	@echo $(TEST_DEPS)
-	@echo "\n"
 	@echo $(DISTRO)
-	@echo $(FIND)
 	@echo $(CC)
-	@echo "\n"
 
 #### Main rule --- build the test runner
 all: $(TESTRUNNER)
